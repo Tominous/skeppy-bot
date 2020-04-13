@@ -7,7 +7,7 @@ module.exports = (client, guild) => {
         .setTitle(`🎉 I was added to a new server!`)
         .setColor('GREEN')
         .setDescription(`I was added to ${guild.name}`)
-        //.addField(`Owner`, guild.owner.user.tag)
+        .addField(`Owner`, guild.owner.user.tag)
         .addField(`Guild ID`, guild.id)
         .addField(`User count`, guild.memberCount)
     if (guild.iconURL) embed.setThumbnail(guild.iconURL);
