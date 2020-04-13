@@ -15,7 +15,7 @@ const SQLite = require("better-sqlite3");
 const sql = new SQLite('./scores.sqlite');
 const npSettings = new Enmap({ name: 'npSettings' });
 const newSettings = new Keyv(config.mongodb, { collection: "settings" })
-    //const autorole = new Enmap({ name: "autorole" })
+    const autorole = new Enmap({ name: "autorole" })
 const autorole = new Keyv(config.mongodb, { collection: 'autorole' })
 const stats = new Keyv(config.mongodb, { collection: "executedCommands" })
 const defaultSettings = {
@@ -30,7 +30,7 @@ client.autorole = autorole
 client.stats = stats
 client.defaultSettings = defaultSettings;
 client.config = config;
-//client.npSettings = npSettings;
+client.npSettings = npSettings;
 client.settings = newSettings;
 const braincellCooldown = new Set();
 client.braincellCooldown = braincellCooldown;
@@ -45,7 +45,7 @@ try {
     dbl = new DBL(config.DBLApiKey, client);
 } catch (e) {}
 client.dbl = dbl;
-//client.music = require("discord.js-musicbot-addon");
+client.music = require("discord.js-musicbot-addon");
 client.queue = {};
 client.musicSettings = {};
 
@@ -83,14 +83,14 @@ function pingLavalinkNodes() {
 setInterval(pingLavalinkNodes, 260000);
 
 client.on("ready", () => {
-    /*  client.guilds.forEach(async guild => {
+      client.guilds.forEach(async guild => {
         const dbtest = await client.settings.get(guild.id)
         if(!dbtest){
           client.createGuild(guild)
         } else if(!dbtest.prefix){
           client.updateGuild(guild, { prefix: 'skeppy' })
         }
-      })*/
+      })
 
     api.run(client)
     pingLavalinkNodes();
@@ -149,7 +149,7 @@ fs.readdir("./events/", (err, files) => {
 client.commands = new Enmap();
 client.aliases = new Enmap();
 client.commandsInfo = new Enmap();
-//client.commandsInfo.set(`commandsInfo`, [])
+client.commandsInfo.set(`commandsInfo`, [])
 client.commandsInfo.set(`categories`, [])
 fs.readdir("./commands/", (err, files) => {
     if (err) return console.error(err);
@@ -187,7 +187,7 @@ client.reloadAllCommands = function() {
 
 client.on("guildMemberAdd", async(member) => {
     if (member.guild) {
-        //const defaultSettings = client.npSettings.ensure(member.guild.id, client.defaultSettings);
+        const defaultSettings = client.npSettings.ensure(member.guild.id, client.defaultSettings);
         const welcomeSettings = await client.getGuild(member.guild)
 
         if (welcomeSettings.welcome) {
@@ -267,7 +267,7 @@ client.execQueue = async(message, queue, player, isfirst = false) => {
                 await getStreamMeta(queue[0].info.uri)
                     .then((song) => {
                         song = song
-                            //console.log(song)
+                            console.log(song)
                     })
             }
             async function getStreamMeta(url) {
@@ -286,14 +286,14 @@ client.execQueue = async(message, queue, player, isfirst = false) => {
                 .setColor("0357ff")
                 .setAuthor(`Now playing`, avatarURL)
                 .setTitle(song)
-                //.setDescription(`${length}`)
+                .setDescription(`${length}`)
                 .setThumbnail(`https://i.ytimg.com/vi/${queue[0].info.identifier}/hqdefault.jpg`)
                 .setURL(queue[0].info.uri)
                 .setFooter(`Added by ${name} | Length: ${length}`));
         }
     }
 
-    //message.channel.send(`Now playing **${queue[0].info.title}**`);
+    message.channel.send(`Now playing **${queue[0].info.title}**`);
 
     player.once('end', async(r) => {
         if (!client.musicSettings[message.guild.id] || client.musicSettings[message.guild.id].loop == 0)
