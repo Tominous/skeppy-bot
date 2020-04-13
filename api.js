@@ -1,6 +1,6 @@
 exports.run = (client) => {
     function uptime(seconds) {
-        //var seconds = os.uptime
+        var seconds = os.uptime
         var days = Math.floor(seconds / (3600 * 24));
         seconds -= days * 3600 * 24;
         var hrs = Math.floor(seconds / 3600);
