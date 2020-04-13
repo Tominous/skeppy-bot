@@ -17,14 +17,14 @@ exports.run = (client, message, args) => {
 
     if (args[0] === "tweet") {
         client.t.get('statuses/user_timeline', { screen_name: 'Skeppy', count: '1' }, function(error, tweets, response) {
-            //console.log(tweets);
+            console.log(tweets);
             var tweet = tweets[0].text
             var screen_name = tweets[0].user.screen_name;
             var username = tweets[0].user.name;
             var tweetId = tweets[0].id_str;
             var pfp = tweets[0].user.profile_image_url_https;
             var timestamp = tweets[0].created_at;
-            //console.log(tweet)
+            console.log(tweet)
 
             const Discord = require('discord.js');
             const tweett = new Discord.MessageEmbed()
@@ -44,11 +44,11 @@ exports.run = (client, message, args) => {
         var axios = require('axios');
         var inputArgs = args.join(" ");
         const channel = inputArgs.slice(args[0].length).trim().split(/ +/g);
-        //message.channel.send(channel)
+        message.channel.send(channel)
         if (args[1]) {
             getVideo(channel)
         } else {
-            //message.channel.send(`🚫 You didn't specify a channel name!`)
+            message.channel.send(`🚫 You didn't specify a channel name!`)
             getVideo('Skeppy')
         }
 
