@@ -21,10 +21,10 @@ exports.run = (client, message, args) => {
                 var firstLyricPart = lyrics.substring(0, Math.min(lyrics.length, 0 + 1990));
                 var lastArrayElement = lyrics.slice(firstLyricPart.length).trim()
                 var requestedBy = message.author.tag
-                    //console.log(lastArrayElement)
+                    console.log(lastArrayElement)
                 for (let i = 0; i < lyrics.length; i += 1990) {
                     const toSend = lyrics.substring(i, Math.min(lyrics.length, i + 1990));
-                    //sendIt(toSend);
+                    sendIt(toSend);
                     if (toSend == firstLyricPart && lastArrayElement.length < 1) {
                         sendIt(toSend, true, true)
                     } else if (toSend == firstLyricPart) {
