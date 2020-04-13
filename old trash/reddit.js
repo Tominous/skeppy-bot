@@ -11,8 +11,8 @@ exports.run = (client, message, args) => {
     function sendReddit(subreddit) {
         axios.get(`https://www.reddit.com/r/${subreddit}/top.json?limit=20`)
             .then(res => {
-                //var data = res.data;
-                //var postData = res.data.data.children[0].data
+                var data = res.data;
+                var postData = res.data.data.children[0].data
                 var array = res.data.data.children
                 var postDataAlmost = array[Math.floor(Math.random() * array.length)];
                 var postData = postDataAlmost.data
@@ -24,7 +24,7 @@ exports.run = (client, message, args) => {
                 var sub = postData.subreddit_name_prefixed
                 var redditPost = new Discord.MessageEmbed()
                     .setTitle(`${title}`)
-                    //.setAuthor(`By u/${author}`)
+                    .setAuthor(`By u/${author}`)
                     .setImage(`${imageUrl}`)
                     .setURL(`https://reddit.com${permalink}`)
                     .setFooter(`👍 ${upvotes} | By u/${author} | ${sub}`)
