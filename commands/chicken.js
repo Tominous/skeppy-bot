@@ -2,7 +2,7 @@ const Canvas = require('canvas');
 const Discord = require('discord.js');
 //ty discordjs.guide
 exports.run = async (client, message, args) => {
-  /*function randomChicken() {
+  function randomChicken() {
     var chickens = [
       "chicken1.jpg",
       "chicken2.jpg",
@@ -10,7 +10,7 @@ exports.run = async (client, message, args) => {
       "chicken4.jpg"
     ]
     return chickens[Math.floor(Math.random() * chickens.length)];
-  }*/
+  }
     if(args[0]){
         const user = message.mentions.users.first()
         if(user){
@@ -24,7 +24,7 @@ exports.run = async (client, message, args) => {
     async function createImage(userMention) {
         const canvas = Canvas.createCanvas(720, 816);
         const ctx = canvas.getContext('2d');
-        //var image = randomChicken();
+        var image = randomChicken();
         const background = await Canvas.loadImage(`./img/chickens/chicken3.jpg`);
         // This uses the canvas dimensions to stretch the image onto the entire canvas
         ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
