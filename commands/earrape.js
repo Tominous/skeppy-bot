@@ -4,7 +4,7 @@ exports.run = (client, message, args) => {
         return message.channel.send(`You need to be in a server to use this command.`);
 
     var queue = client.getQueue(message.guild.id);
-    //if(![client.config.ownerID, client.config.adminID].some(a => message.author.id == a)) return;
+    if(![client.config.ownerID, client.config.adminID].some(a => message.author.id == a)) return;
     if ([client.config.ownerID, client.config.adminID].some(a => message.author.id == a) || message.member.roles.some(r => ["DJ", "dj", "DeeJay", "deejay"].includes(r.name))) {
         if (!message.member.voice.channel.id)
             return message.channel.send(`You're not in a voice channel!`);
