@@ -40,7 +40,7 @@ exports.run = (client, message, args) => {
     }
 
     function uptime(seconds) {
-        //var seconds = os.uptime
+        var seconds = os.uptime
         var days = Math.floor(seconds / (3600 * 24));
         seconds -= days * 3600 * 24;
         var hrs = Math.floor(seconds / 3600);
@@ -52,8 +52,8 @@ exports.run = (client, message, args) => {
     var time = process.uptime();
     var DJSVer = require('../package.json').dependencies["discord.js"].slice('^'.length).trim().split(/ +/g);
     var embed = new Discord.MessageEmbed()
-        .setTitle("Skeppy Bot Info")
-        .setDescription("Here's some info about me")
+        .setTitle("Skeppy Bot Information")
+        .setDescription("Here's some information about me")
         .setURL('https://skeppybot.xyz')
         .setThumbnail(client.user.avatarURL)
         .addField(`Server count`, client.guilds.cache.size, true)
@@ -70,7 +70,7 @@ exports.run = (client, message, args) => {
 exports.info = {
     name: `info`,
     aliases: [`stats`],
-    description: `Show info about the Skeppy bot!`,
+    description: `Show information about the Skeppy bot!`,
     usage: `info`,
     category: `Misc`
 }
