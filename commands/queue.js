@@ -10,9 +10,9 @@ exports.run = (client, message, args) => {
             return message.channel.send(`No music is playing!`);
 
         var q = queue;
-        //var requestedBy = client.users.resolve(queue[0].requestedBy).username
-        //var list = queue.map((a, i) => `**${i + 1}**. ${a.info.author ? `[**${a.info.title}**](${a.info.uri}) by **${a.info.author}**` : `Unknown`} (${client.getYTLength(a.info.length)})`);
-        //var list = queue.map((a, i) => `**${i + 1}**. ${a.info.author ? `[**${a.info.title}**](${a.info.uri})` : `Unknown`} added by **${client.users.resolve(a.requestedBy).username}** (${client.getYTLength(a.info.length)})`);
+        var requestedBy = client.users.resolve(queue[0].requestedBy).username
+        var list = queue.map((a, i) => `**${i + 1}**. ${a.info.author ? `[**${a.info.title}**](${a.info.uri}) by **${a.info.author}**` : `Unknown`} (${client.getYTLength(a.info.length)})`);
+        var list = queue.map((a, i) => `**${i + 1}**. ${a.info.author ? `[**${a.info.title}**](${a.info.uri})` : `Unknown`} added by **${client.users.resolve(a.requestedBy).username}** (${client.getYTLength(a.info.length)})`);
         var list = queue.map((a, i) => {
                     if (i == 0) return;
                     return `**${i}**. ${a.info.author ? `[**${a.info.title}**](${a.info.uri})` : `Unknown`} added by **${client.users.resolve(a.requestedBy).username}** (${client.getYTLength(a.info.length)})`
@@ -41,9 +41,9 @@ exports.run = (client, message, args) => {
       shuffleV = `on`
   }
 
-    //embed.addField('Current Settings', `**Loop**: ${client.musicSettings[message.guild.id].loop}\n**Shuffle**: ${client.musicSettings[message.guild.id].shuffle}\n **Now playing messages**: ${npMsgs}`);
-  //else
-    //embed.addField('Current Settings', `**Loop**: 0\n**Shuffle**: false\n **Song updates**: ${npMsgs}`);
+    embed.addField('Current Settings', `**Loop**: ${client.musicSettings[message.guild.id].loop}\n**Shuffle**: ${client.musicSettings[message.guild.id].shuffle}\n **Now playing messages**: ${npMsgs}`);
+  else
+    embed.addField('Current Settings', `**Loop**: 0\n**Shuffle**: false\n **Song updates**: ${npMsgs}`);
       embed.addField('Current Settings', `**Loop**: ${loopV}\n**Shuffle**: ${shuffleV}\n**Song updates**: ${message.settings.np ? 'on' : 'off'}`)
     message.channel.send(embed);
 }
