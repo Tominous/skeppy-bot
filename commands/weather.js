@@ -23,7 +23,7 @@ exports.run = async(client, message, args) => {
             var icon = data.icon_url;
             var embed = new Discord.MessageEmbed()
                 .setTitle(`${temperature}°C/°F ${summary}`)
-                //.setDescription(summary)
+                .setDescription(summary)
                 .setColor(`GREEN`)
                 .setThumbnail(icon)
                 .addField(`Temperature`, `${temperature}°C/°F`, true)
