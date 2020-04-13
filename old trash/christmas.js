@@ -14,7 +14,7 @@ exports.run = (client, message, args) => {
         if (howMany > 5)
             return message.reply('That amount is too high')
         client.t.get('statuses/user_timeline', { screen_name: 'triiochristmas', count: howMany }, function(error, tweets, response) {
-            //console.log(tweets);
+            console.log(tweets);
             tweets.forEach(sendMsg)
         });
 
@@ -25,7 +25,7 @@ exports.run = (client, message, args) => {
             var tweetId = tweet.id_str;
             var pfp = tweet.user.profile_image_url_https;
             var timestamp = tweet.created_at;
-            //console.log(tweet)
+            console.log(tweet)
 
             const tweett = new Discord.MessageEmbed()
                 .setColor('#0099ff')
