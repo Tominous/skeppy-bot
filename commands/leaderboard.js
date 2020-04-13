@@ -17,7 +17,7 @@ exports.run = (client, message, args) => {
     const embed = new Discord.MessageEmbed()
         .setTitle("Leaderboard")
         .setAuthor(client.user.username, client.user.avatarURL)
-        //.setDescription("Our top 10 points leaders!")
+        .setDescription("Our top 10 points leaders!")
         .setColor(0x00AE86);
 
     if (top10.length < 10) {
