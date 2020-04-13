@@ -38,7 +38,7 @@ exports.run = async(client, message, args) => {
         await getStreamMeta(queue[0].info.uri)
             .then((song) => {
                 song = song
-                    //console.log(song)
+                    console.log(song)
             })
     }
 
