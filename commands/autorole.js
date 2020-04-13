@@ -8,9 +8,9 @@ exports.run = async(client, message, args) => {
             return message.reply("You need `MANAGE_ROLES` permisson!")
         }
 
-        /*if(!args[0]){
+        if(!args[0]){
             return message.reply("please tell me which level I should give a role to or if you want to remove a role!")
-        }*/
+        }
         if (!args[0] || args[0] == "list" || args[0] == "rules") {
             const DB = await client.autorole.get(message.guild.id)
             if (!DB) {
@@ -114,7 +114,7 @@ exports.run = async(client, message, args) => {
 exports.info = {
     name: `autorole`,
     aliases: [],
-    description: `Sets the autorole info`,
+    description: `Sets the autorole information`,
     usage: `autorole <level>`,
     category: `Levels`
 }
