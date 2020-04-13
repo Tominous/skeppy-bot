@@ -1,6 +1,6 @@
 // Legacy (discord.js-musicbot-addon)
 
-/*exports.run = (client, message, args) => {
+exports.run = (client, message, args) => {
   const searchstring = args.join(" ");
   if (searchstring.includes(".mp3") && message.member.voiceChannel){
       const connection = message.member.voiceChannel.join().then(connection => {
@@ -10,7 +10,7 @@
     } else {
     client.music.bot.playFunction(message, searchstring);
   }
-}*/
+}
 
 // Lavalink version
 
@@ -36,8 +36,8 @@ exports.run = async(client, message, args) => {
           }
         });
         var results = res.data.tracks
-        //console.log(res.data)
-        //if(!res.data.tracks || res.data.loadType == 'NO_MATCHES') return message.channel.send(`No results found.`) && message.channel.stopTyping();
+        console.log(res.data)
+        if(!res.data.tracks || res.data.loadType == 'NO_MATCHES') return message.channel.send(`No results found.`) && message.channel.stopTyping();
         results.forEach((results) => {
           results.requestedBy = userid
         })
@@ -71,7 +71,7 @@ exports.run = async(client, message, args) => {
   var msg = message; // Also shush
   const betterArgs = args.join(' ').trim();
   let canPlay = false;
-  //await message.channel.send(`Hold on...`);
+  await message.channel.send(`Hold on...`);
   if (!msg.member.voice.channel)
     return message.channel.send(`You're not in a voice channel!`);
 
@@ -81,13 +81,13 @@ exports.run = async(client, message, args) => {
   if (!betterArgs && !bot.player.get(message.guild.id))
     return message.channel.send(`You didn't give anything to play!`);
 
-  //await message.channel.startTyping()
+  await message.channel.startTyping()
   const m = await message.channel.send(`Hold on...`)
 
 
   var queue = bot.getQueue(message.guild.id);
   var track = await getSongs(betterArgs.startsWith(`http`) ? betterArgs : `ytsearch:${betterArgs}`, message.author.id);
-  //console.log(track)
+  console.log(track)
   var requestedBy = track.userid
   if (track instanceof Error)
     if (e) {
@@ -122,13 +122,13 @@ exports.run = async(client, message, args) => {
         errors: ['time'],
       })
       .then((collected) => {
-        /*if(parseInt(collected.first().content) == NaN || !parseInt(collected.first().content)){
+        if(parseInt(collected.first().content) == NaN || !parseInt(collected.first().content)){
           m.then(m => {
             m.edit(new Discord.MessageEmbed().setColor("0357ff").setTitle(`Selection closed.`))
           })
           message.channel.send(`You must specify a number between 1 and 10!`);
           return;
-        }*/
+        }
         if(collected.first().content == "cancel") {
           m.edit("Canceled.")
           return;
@@ -209,7 +209,7 @@ exports.run = async(client, message, args) => {
       });
     });
   }
-  //message.channel.stopTyping()
+  message.channel.stopTyping()
   m.then(m => {
     m.edit(new Discord.MessageEmbed()
       .setColor("0357ff")
@@ -221,7 +221,7 @@ exports.run = async(client, message, args) => {
 • **URL**: [${track[0].info.uri}](${track[0].info.uri})
 `));
   })
-  /*message.channel.send(new Discord.MessageEmbed()
+  message.channel.send(new Discord.MessageEmbed()
   .setColor("0357ff")
   .setAuthor(`Added ${urlParams.get('list') ? "playlist" : "song"} to queue!`)
   .setTitle(song)
@@ -229,7 +229,7 @@ exports.run = async(client, message, args) => {
   .setFooter(`Length: ${length} | ${track[0].info.author}`)
   .setDescription(`
 • **URL**: [${track[0].info.uri}](${track[0].info.uri})
-  `));*/
+  `));
 
   if (canPlay) {
     var theHost = getIdealHost(bot, message.guild.region);
